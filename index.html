@@ -27,17 +27,25 @@
   -->
   <div id="app" v-cloak>
     {{ greeting }}
-    <input v-model="greeting" />
+
+    <!-- 
+      keyup event with "enter" modifier
+      it means that the event is listening an specific key
+    -->
+    <input @keyup.enter="greet(greeting)" v-model="greeting" />
 
     <hr>
-
+    <!-- 
+      v-on: = @click;
+      basically a click event calling and the string passed is the instruction
+      here the instruction is the toggleBox method
+    -->
+    <button @click="toggleBox">Toggle box</button>
     <!-- 
       the block below works exactly as a "if else" code block
       this still renders all the elements in screen before loading the variables
     -->
     <div v-if="isVisible" class="box box-one" ></div>
-    <div v-else-if="isVisible2" class="box box-two" ></div>
-    <div v-else class="box box-three" ></div>
     <!--
       vi-if don't render the element
       instead of, v-show just set an display none to it
@@ -50,8 +58,16 @@
       data: function() {
         return {
           greeting: 'Hello World!',
-          isVisible: false,
-          isVisible2: false
+          isVisible: false
+        }
+      },
+      // we can also pass an array of methods
+      methods: {
+        toggleBox() {
+          this.isVisible = !this.isVisible
+        },
+        greet(greeting) {
+          console.log(greeting)
         }
       }
     })
@@ -59,3 +75,5 @@
   </script>
 </body>
 </html>
+
+<!-- video time: 29:20 -->
